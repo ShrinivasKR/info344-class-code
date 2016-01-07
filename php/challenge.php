@@ -6,18 +6,17 @@ for ($m = 1; $m <= 12; $m++) {
     $months[$m] = date('F', mktime(0,0,0,$m));
 }
 
-foreach ($months as $month) {
-    echo "$month\n";
+function displayMonths($months) {
+    foreach ($months as $month) {
+        echo "$month\n";
+    }  
+    echo "\n";
 }
 
-echo "\n";
+displayMonths($months);
 
 sort($months, SORT_STRING);   
 
-foreach ($months as $month) {
-    echo "$month\n";
-}
-
-echo "\n";
+displayMonths($months);
 
 ?>
