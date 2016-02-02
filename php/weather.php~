@@ -10,7 +10,7 @@
     
         $url = parse_url($_SERVER['REQUEST_URI']);
 
-        $location = substr($url['path'], 35);
+        $location = substr($url['path'], 12);
         if (strlen($location) == 0) {
             $locationData = json_decode(file_get_contents('http://ip-api.com/json'));
             $city = $locationData->city;
