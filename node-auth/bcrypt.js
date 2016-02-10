@@ -4,7 +4,7 @@ var bluebird = require('bluebird');
 var bcrypt = bluebird.promisifyAll(require('bcrypt'));
 
 var password = process.argv[2];
-var rounds = 10;
+var rounds = 13;
 
 if (process.argv.length >= 4) {
     rounds = parseInt(process.argv[3]);
