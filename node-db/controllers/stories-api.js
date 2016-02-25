@@ -1,17 +1,5 @@
 'use strict';
 
-<<<<<<< HEAD
-var express = require('express');
-var request = require('request');
-var cheerio = require('cheerio');
-
-module.exports.Router = function(Story) {
-    var router = express.Router();
-    
-    router.get('/stories', function(req, res, next) {
-        //return all stories from the database
-        Story.getAll()
-=======
 var express = require('express');           //sub-routers 
 var request = require('request');           //request URLs
 var htmlparser = require('htmlparser2');    //parse html
@@ -29,46 +17,17 @@ module.exports.Router = function(stories) {
         //TODO: support offset and limit as query string parameters
         //so the clients can page through all stories
         stories.getAll()
->>>>>>> dd127347d12c8bb16a0f6d7fa4d2cd6133701c08
             .then(function(rows) {
                 res.json(rows);
             })
             .catch(next);
     });
     
-<<<<<<< HEAD
-=======
     //POST /stories
->>>>>>> dd127347d12c8bb16a0f6d7fa4d2cd6133701c08
     router.post('/stories', function(req, res, next) {
         //insert a new story into the database
         //and return the data with default values
         //applied
-<<<<<<< HEAD
-        request.get(req.body.url, function(err, response, body) {
-            if (err) {
-                req.body.title = req.body.url;
-            }
-            else {
-                var $ = cheerio.load(body);
-                req.body.title = $('head title').text();                
-            }
-            
-            Story.insert(req.body)
-                .then(function(row) {
-                    res.json(row);
-                })
-                .catch(next);            
-        });
-        
-         
-    });
-    
-    router.post('/stories/:id/votes', function(req, res, next) {
-        //upvote the story and return the
-        //full story with current number of votes
-        Story.upVote(req.params.id)
-=======
         
         //TODO: validate that req.body.url exists and is a valid URL
         
@@ -132,7 +91,6 @@ module.exports.Router = function(stories) {
         //the property on req.params will have the same name as whatever
         //you had following the : in the URL
         stories.upVote(req.params.id)
->>>>>>> dd127347d12c8bb16a0f6d7fa4d2cd6133701c08
             .then(function(row) {
                 res.json(row);
             })
@@ -140,8 +98,4 @@ module.exports.Router = function(stories) {
     });
     
     return router;
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> dd127347d12c8bb16a0f6d7fa4d2cd6133701c08

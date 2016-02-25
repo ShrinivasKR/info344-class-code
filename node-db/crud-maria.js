@@ -1,14 +1,5 @@
 'use strict';
 
-<<<<<<< HEAD
-var mysql = require('mysql');
-var bluebird = require('bluebird');
-
-//load connection information
-var dbConfig = require('./secret/config-maria.json');
-
-//creates a connection to the database
-=======
 //mysql driver
 var mysql = require('mysql');
 
@@ -26,7 +17,6 @@ var dbConfig = require('./secret/config-maria.json');
 //create a connection to the database
 //use bluebird.promisfyAll() to turn all the callback-style
 //APIs into APIs that return Promises instead
->>>>>>> dd127347d12c8bb16a0f6d7fa4d2cd6133701c08
 var conn = bluebird.promisifyAll(mysql.createConnection(dbConfig));
 
 //id of newly inserted row
@@ -40,53 +30,6 @@ function logRows(rows) {
     rows.forEach(logRow);
 }
 
-<<<<<<< HEAD
-conn.queryAsync('insert into stories (url) values (?)', ['http://google.com'])
-    .then(function(results) {
-        console.log('row inserted, new id = %s', results.insertId);
-        id = results.insertId;
-        return conn.queryAsync('select * from stories where id=?', [results.insertId]);
-    })
-    .then(logRows)
-    .then(function(rows) {
-        logRow(rows[0]);
-        return conn.queryAsync('update stories set votes=votes+1 where id=?', [id]);
-    })
-    .then(function(results) {
-        console.log('%d rows affected', results.affectedRows);
-    })
-    .then(function(rows) {
-        logRow(rows[0]);
-    })
-    .then(logRows)
-    .then(function() {
-        return conn.queryAsinc('delete from stories where id=?', [id]);
-    })
-    .then(function(results) {
-        console.log('%d rows affected', results.affectedRows);
-    })
-    .then(function() {
-        conn.end();
-    })
-    .catch(function(err) {
-        console.error(err);
-        conn.end();
-    });
-
-/*
-conn.query('select * from stories', function(err, rows) {
-    if (err) {
-        console.error(err);
-    }    else {
-        console.log('%d rows returned', rows.length);
-        rows.forEach(function(row) {
-            console.log(row);
-        });
-    }
-    conn.end();
-});
-*/
-=======
 //Bluebird adds new methods to the connection object, 
 //one for each method in the original interface, but with the name
 //<name>Async(); this allows you to use the original callback-style
@@ -140,4 +83,3 @@ conn.queryAsync('insert into stories (url) values (?)', ['http://google.com'])
         //this executes always 
         conn.end();
      });
->>>>>>> dd127347d12c8bb16a0f6d7fa4d2cd6133701c08
